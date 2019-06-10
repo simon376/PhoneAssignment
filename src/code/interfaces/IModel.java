@@ -9,8 +9,14 @@ public interface IModel {
     void endCall();
     void sendTextMessage();
 
-    void updateNumber(String number);
-    void updateMessage(String message);
+    String getDraft();
+    void saveDraft();
 
-    String getDraft(String phoneNumber);
+    String getTextMessage();
+    void setTextMessage(String msg);
+    String getPhoneNumber();
+    void setPhoneNumber(String nmbr);
+
+
+    void clearData();
 }

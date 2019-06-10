@@ -12,7 +12,7 @@ public class Main {
         System.out.println("Hello World!");
 
         IModel theModel = new PhoneModel();
-        IController theController = new PhoneController(theModel);
+        IController theController = new PhoneController(new StateDialing(), theModel);
         OldSchoolUi oldSchoolUi = new OldSchoolUi(theModel,theController);
 
         JFrame frame = new JFrame("Phone");

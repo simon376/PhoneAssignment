@@ -11,10 +11,11 @@ public class Context {
     {
         State = state;
         Model = model;
+        Model.clearData();
     }
 
 
-    public void requestButtonHandling(String button) {State.handleButton(this, button);}
+//    public void requestButtonHandling(String button) {State.handleButton(this, button);}
 //    public void requestPhoneClick(){
 //        State.handlePhoneButton(this);
 //    }

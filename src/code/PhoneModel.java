@@ -3,8 +3,9 @@ package code;
 import code.interfaces.IModel;
 import code.interfaces.IView;
 
-import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class PhoneModel implements IModel {
 
@@ -22,26 +23,10 @@ public class PhoneModel implements IModel {
         System.out.println("message to number: " + currentPhoneNumber + ": " + currentTextMessage);
     }
 
-    @Override
-    public void updateNumber(String number) {
-        this.currentPhoneNumber = number;
-        NotifyViewsPhone();
-    }
 
     @Override
-    public void updateMessage(String message) {
-        this.currentTextMessage = message;
-        NotifyViewsText();
-    }
-
-    @Override
-    public String getDraft(String phoneNumber) {
-        String draft = Drafts.get(phoneNumber);
-        if(!draft.isEmpty())
-            return draft;
-        else
-            return "";
-
+    public String getDraft() {
+        return Drafts.get(currentPhoneNumber);
     }
 
 
@@ -49,11 +34,48 @@ public class PhoneModel implements IModel {
         Drafts.put(currentPhoneNumber, currentTextMessage);
     }
 
+    @Override
+    public String getTextMessage() {
+        if(currentTextMessage == null)
+            return "";
+        else
+            return currentTextMessage;
+    }
+
+    @Override
+    public void setTextMessage(String msg) {
+        currentTextMessage = msg;
+        NotifyViews(currentTextMessage);
+    }
+
+    @Override
+    public String getPhoneNumber() {
+        if(currentPhoneNumber == null)
+            return "";
+        else
+            return currentPhoneNumber;
+    }
+
+    @Override
+    public void setPhoneNumber(String nmbr) {
+        currentPhoneNumber = nmbr;
+        NotifyViews(currentPhoneNumber);
+    }
+
+    @Override
+    public void clearData() {
+        currentTextMessage = "";
+        currentPhoneNumber = "";
+    }
+
     void deleteDraft(){
         Drafts.remove(currentPhoneNumber);
     }
 
     private int theState = 0;
+
+//TODO: remove null's from messages & numbers,
+
 
     private String currentPhoneNumber;
     private String currentTextMessage;
@@ -63,21 +85,16 @@ public class PhoneModel implements IModel {
     // drafts will be saved as a phonenumber-textmessage pair
     private HashMap<String,String> Drafts = new HashMap<>();
 
+
     public void RegisterView(IView Target)
     {
         this.Views.add(Target);
     }
 
-    private void NotifyViewsPhone(){
+    private void NotifyViews(String text){
         for(IView Current : Views)
-            Current.Update(currentPhoneNumber);
+            Current.Update(text);
 
-    }
-
-    private void NotifyViewsText()
-    {
-        for(IView Current : Views)
-            Current.Update(currentTextMessage);
     }
 
     //TODO
@@ -85,5 +102,6 @@ public class PhoneModel implements IModel {
     {
         this.theState++;
     }
+
 
 }

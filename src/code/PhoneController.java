@@ -3,15 +3,20 @@ package code;
 import code.interfaces.IController;
 import code.interfaces.IModel;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class PhoneController implements IController {
+public class PhoneController extends Context implements IController {
     private IModel theModel;
+    private KeyMap theKeyMap;
 
-    public PhoneController(IModel theModel)
+
+    public PhoneController(StateBase stateBase, IModel theModel)
     {
+        super(stateBase, theModel);
         this.theModel = theModel;
+        this.theKeyMap = new KeyMap();
     }
 
     public void Update()
@@ -20,38 +25,12 @@ public class PhoneController implements IController {
     }
 
     @Override
-    public void HandleButtonClick(String value) {
-        // perform action depending on state (Messaging <-> Dialing <-> Calling)
-        //TODO: state, case-enum
-//        switch (value){
-//            case "accept": theModel.makePhoneCall(); break;
-//            case "decline": theModel.
-//        }
-//        if(value == "accept"){
-//            theModel.makePhoneCall();
-//        }
+    public void HandleButtonClick(String value, int timesPressed) {
+        State.handleButton(this, value, timesPressed);
 
     }
 
 }
 
 
-
-class NumberButtonClickListener implements ActionListener
-{
-    private String value;
-    private IController theController;
-
-    public NumberButtonClickListener(IController theController, String value)
-    {
-        this.theController = theController;
-        this.value = value;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        theController.HandleButtonClick(value);
-    }
-
-}
 
