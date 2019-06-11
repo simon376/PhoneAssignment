@@ -83,11 +83,11 @@ class StateDialingModern extends StateBase
         //somehow detect double-click
         // show qwerty keyboard,
 
-        //TODO: replace last letter with correct one
         if(timesPressed == 2){
             // start messaging
             //try to fetch draft if one exists
             context.Model.setTextMessage( context.Model.getDraft());
+
 
             context.State = new StateMessagingModern();
         }

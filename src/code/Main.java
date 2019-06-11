@@ -36,7 +36,7 @@ public class Main {
         frame2.setVisible(true);
 
         ModernUi m = modernUi;
-        m.setPanelKeyboard(new QwertyKeyboard(oldschoolPhoneController));
+        m.switchKeyboard();
         frame2.setContentPane(modernUi.getPanelPhone());
         frame2.pack();
         frame2.setVisible(true);

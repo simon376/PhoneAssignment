@@ -49,7 +49,7 @@ public class PhoneModel implements IModel {
 
     @Override
     public void setTextMessage(String msg) {
-        if(msg.length() > MAX_TEXT_LENGTH)
+        if(!msg.isEmpty() && msg.length() > MAX_TEXT_LENGTH)
             msg = msg.substring(0, MAX_TEXT_LENGTH);
         currentTextMessage = msg;
         NotifyViews(currentTextMessage);

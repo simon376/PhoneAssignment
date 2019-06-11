@@ -20,6 +20,7 @@ public class QwertyKeyboard extends JPanel {
     //special charactors on keyboard that has to be addressed duing keypress
     String specialChars ="~-+[]\\;',.?";
 
+    //TODO: Build CardLayout
 
     private IController theController;
     private IModel theModel;

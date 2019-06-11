@@ -10,6 +10,8 @@ import java.awt.*;
 
 public class ModernUi implements IView {
     private JPanel panelPhone;
+    private JPanel panelKeyboard;
+    private JPanel panelKeyBoardQwerty;
     private JPanel panelKeyboardNumerical;
     private JPanel panelScreen;
     private JButton Button1;
@@ -27,6 +29,36 @@ public class ModernUi implements IView {
     private JTextArea text_screen;
     private JButton ButtonPhone;
     private JButton ButtonAction;
+    private JButton qButton;
+    private JButton wButton;
+    private JButton eButton;
+    private JButton rButton;
+    private JButton tButton;
+    private JButton yButton;
+    private JButton uButton;
+    private JButton iButton;
+    private JButton oButton;
+    private JButton pButton;
+    private JButton aButton;
+    private JButton dButton;
+    private JButton fButton;
+    private JButton lButton;
+    private JButton kButton;
+    private JButton sButton;
+    private JButton gButton;
+    private JButton hButton;
+    private JButton jButton;
+    private JButton vButton;
+    private JButton cButton;
+    private JButton bButton;
+    private JButton SHIFTButton;
+    private JButton mButton;
+    private JButton zButton1;
+    private JButton xButton;
+    private JButton nButton;
+    private JButton SPACEButton;
+    private JButton DRAFTButton;
+    private JButton SENDButton;
 
     public JPanel getPanelPhone() {
         return panelPhone;
@@ -34,6 +66,9 @@ public class ModernUi implements IView {
 
     private IController theController;
     private IModel theModel;
+    final static String NUMPANEL = "Card with Numbers";
+    final static String QWERTYPANEL = "Card with Qwerty";
+    boolean isNumPad = true;
 
     public ModernUi(IModel theModel, IController theController)
     {
@@ -41,6 +76,9 @@ public class ModernUi implements IView {
         this.theModel.RegisterView(this);
         this.theController = theController;
         initializeNumericalKeyboard();
+
+        panelKeyboard.add(panelKeyboardNumerical,NUMPANEL);
+        panelKeyboard.add(panelKeyBoardQwerty,QWERTYPANEL);
     }
 
 
@@ -61,9 +99,13 @@ public class ModernUi implements IView {
         ButtonAction.addActionListener(new ButtonClickListener(theController, "action"));
     }
 
-    public void setPanelKeyboard(JPanel panel){
-        panelPhone.remove(panelKeyboardNumerical);
-        panelPhone.add(panel);
+    public void switchKeyboard()
+    {
+        CardLayout layout = (CardLayout) panelKeyboard.getLayout();
+        if(isNumPad)
+            layout.show(panelKeyboard,QWERTYPANEL);
+        else
+            layout.show(panelKeyboard,NUMPANEL);
     }
 
     @Override
