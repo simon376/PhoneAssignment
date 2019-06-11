@@ -14,11 +14,13 @@ public class Main {
         System.out.println("Hello World!");
 
         IModel theModel = new PhoneModel();
-        IController theController = new PhoneController(new StateDialing(), theModel);
-        OldSchoolUi oldSchoolUi = new OldSchoolUi(theModel,theController);
-        ModernUi modernUi = new ModernUi(theModel,theController);
+        IController oldschoolPhoneController = new OldschoolPhoneController(new StateDialingOld(), theModel);
+        OldSchoolUi oldSchoolUi = new OldSchoolUi(theModel,oldschoolPhoneController);
 
-        new QwertyKeyboard(theController).setVisible(true);
+        IController modernPhoneController = new ModernPhoneController(new StateDialingModern(), theModel);
+        ModernUi modernUi = new ModernUi(theModel,modernPhoneController);
+
+        new QwertyKeyboard(oldschoolPhoneController).setVisible(true);
 
         JFrame frame = new JFrame("Phone");
         frame.setContentPane(oldSchoolUi.getPanelPhone());
@@ -30,6 +32,12 @@ public class Main {
         JFrame frame2 = new JFrame("Phone");
         frame2.setContentPane(modernUi.getPanelPhone());
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame2.pack();
+        frame2.setVisible(true);
+
+        ModernUi m = modernUi;
+        m.setPanelKeyboard(new QwertyKeyboard(oldschoolPhoneController));
+        frame2.setContentPane(modernUi.getPanelPhone());
         frame2.pack();
         frame2.setVisible(true);
 

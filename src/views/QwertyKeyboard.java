@@ -7,7 +7,7 @@ import code.interfaces.IModel;
 import javax.swing.*;
 import java.awt.*;
 
-public class QwertyKeyboard extends JFrame {
+public class QwertyKeyboard extends JPanel {
 
     //Individual keyboard rows
     private String[] firstRow = {"Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P"};
@@ -31,16 +31,6 @@ public class QwertyKeyboard extends JFrame {
     {
         this.theController = controller;
 
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //set non resizable
-        this.setResizable(false);
-        //super.setSize(500,300);
-        //set size of the content pane ie frame
-//        this.getContentPane().setPreferredSize(new Dimension(1000,600));
-        //super.getContentPane().setSize(800,400);
-        //set location for the frame
-//        this.setLocation(50,50);
-
         //init and paint frame
         initWidgets();
     }
@@ -62,7 +52,7 @@ public class QwertyKeyboard extends JFrame {
         //layout for keyboard
         jpKeyboard.setLayout(new GridLayout(4,1));
         //pack the components
-        pack();
+        //pack();
 
         /*paint first keyboard row  and add it to the keyboard*/
         //JButtons corresponding to each individual rows

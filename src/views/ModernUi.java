@@ -25,6 +25,8 @@ public class ModernUi implements IView {
     private JButton Button0;
     private JButton ButtonPound;
     private JTextArea text_screen;
+    private JButton ButtonPhone;
+    private JButton ButtonAction;
 
     public JPanel getPanelPhone() {
         return panelPhone;
@@ -55,10 +57,14 @@ public class ModernUi implements IView {
         Button9.addActionListener(new ButtonClickListener(theController, "9"));
         ButtonStar.addActionListener(new ButtonClickListener(theController, "*"));
         ButtonPound.addActionListener(new ButtonClickListener(theController, "#"));
-//        ButtonPhone.addActionListener(new ButtonClickListener(theController, "phone"));
-//        ButtonHangup.addActionListener(new ButtonClickListener(theController, "hangup"));
+        ButtonPhone.addActionListener(new ButtonClickListener(theController, "phone"));
+        ButtonAction.addActionListener(new ButtonClickListener(theController, "action"));
     }
 
+    public void setPanelKeyboard(JPanel panel){
+        panelPhone.remove(panelKeyboardNumerical);
+        panelPhone.add(panel);
+    }
 
     @Override
     public void Update(String newText) {

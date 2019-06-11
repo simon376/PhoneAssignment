@@ -76,7 +76,7 @@ public class PhoneModel implements IModel {
         NotifyViews("");
     }
 
-    void deleteDraft(){
+    public void deleteDraft(){
         Drafts.remove(currentPhoneNumber);
     }
 

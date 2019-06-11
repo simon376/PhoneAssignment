@@ -6,7 +6,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-//TODO: Fuse with PhoneController? but then i'd have one controller for every button...
+//TODO: Fuse with OldschoolPhoneController? but then i'd have one controller for every button...
 public class ButtonClickListener implements ActionListener
 {
     private String value;

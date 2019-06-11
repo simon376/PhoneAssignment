@@ -19,4 +19,6 @@ public interface IModel {
 
 
     void clearData();
+
+    void deleteDraft();
 }
