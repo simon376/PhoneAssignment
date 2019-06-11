@@ -11,7 +11,6 @@ public class Context {
     {
         State = state;
         Model = model;
-        Model.clearData();
     }
 
 

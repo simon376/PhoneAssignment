@@ -26,13 +26,11 @@ public class OldSchoolUi implements IView {
     private JPanel panelCallButtons;
     private JButton ButtonPhone;
     private JButton ButtonHangup;
+    private JPanel panelPhone;
 
     public JPanel getPanelPhone() {
         return panelPhone;
     }
-
-    private JPanel panelPhone;
-
 
     private IController theController;
     private IModel theModel;

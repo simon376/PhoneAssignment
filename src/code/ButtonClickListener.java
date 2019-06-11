@@ -13,40 +13,38 @@ public class ButtonClickListener implements ActionListener
     private IController theController;
 //TODO: das muss doch in den Controller, weil er global überwachen muss welcher button zuletzt gedrückt wurde,
 // nicht jeder listener für jeden button einzeln
-    private JButton lastButtonPressed;
-    private int buttonCounter;
-
-    private long timerStart;
-    private static final long MAX_TIME_DIFF = 500;
+//    private JButton lastButtonPressed;
+//    private int buttonCounter;
+//
+//    private long timerStart;
+//    private static final long MAX_TIME_DIFF = 500;
 
     public ButtonClickListener(IController theController, String value)
     {
         this.theController = theController;
         this.value = value;
-        this.timerStart = 0;
-        this.buttonCounter = 0;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton buttonPressed = (JButton) e.getSource();
+//
+//        //TODO: time presses
+//        if (lastButtonPressed == buttonPressed)
+//        {
+//            //The same button was clicked two times in a row
+//            long difference = (System.currentTimeMillis() - timerStart);
+//            if(difference < MAX_TIME_DIFF)
+//                buttonCounter++;
+//        }
+//        else
+//        {
+//            buttonCounter = 0;
+//        }
+//        timerStart = System.currentTimeMillis();
+//        lastButtonPressed = buttonPressed;
 
-        //TODO: time presses
-        if (lastButtonPressed == buttonPressed)
-        {
-            //The same button was clicked two times in a row
-            long difference = (System.currentTimeMillis() - timerStart);
-            if(difference < MAX_TIME_DIFF)
-                buttonCounter++;
-        }
-        else
-        {
-            buttonCounter = 0;
-        }
-        timerStart = System.currentTimeMillis();
-        lastButtonPressed = buttonPressed;
-
-        theController.HandleButtonClick(value, buttonCounter);
+        theController.HandleButtonClick(buttonPressed, value);
     }
 
 }

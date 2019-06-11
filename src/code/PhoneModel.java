@@ -16,11 +16,14 @@ public class PhoneModel implements IModel {
 
     public void endCall(){
         System.out.println("phone call ended.");
+        clearData();
     }
 
     @Override
     public void sendTextMessage() {
         System.out.println("message to number: " + currentPhoneNumber + ": " + currentTextMessage);
+        deleteDraft();
+        clearData();
     }
 
 
@@ -32,6 +35,8 @@ public class PhoneModel implements IModel {
 
     public void saveDraft(){
         Drafts.put(currentPhoneNumber, currentTextMessage);
+        System.out.println("saved draft: " + currentTextMessage + " to: " + currentPhoneNumber);
+        clearData();
     }
 
     @Override
@@ -44,6 +49,8 @@ public class PhoneModel implements IModel {
 
     @Override
     public void setTextMessage(String msg) {
+        if(msg.length() > MAX_TEXT_LENGTH)
+            msg = msg.substring(0, MAX_TEXT_LENGTH);
         currentTextMessage = msg;
         NotifyViews(currentTextMessage);
     }
@@ -66,6 +73,7 @@ public class PhoneModel implements IModel {
     public void clearData() {
         currentTextMessage = "";
         currentPhoneNumber = "";
+        NotifyViews("");
     }
 
     void deleteDraft(){
@@ -76,6 +84,7 @@ public class PhoneModel implements IModel {
 
 //TODO: remove null's from messages & numbers,
 
+    private static final int MAX_TEXT_LENGTH = 160;
 
     private String currentPhoneNumber;
     private String currentTextMessage;

@@ -12,7 +12,7 @@ public class KeyMap {
     }
 
     private void initializeMap() {
-        map.put("0", new ArrayList<>(Arrays.asList("0")));
+        map.put("0", new ArrayList<>(Arrays.asList("0", " ")));
         map.put("1", new ArrayList<>(Arrays.asList("1", "@")));
         map.put("2", new ArrayList<>(Arrays.asList("2", "a", "b", "c")));
         map.put("3", new ArrayList<>(Arrays.asList("3", "d", "e", "f")));
