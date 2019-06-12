@@ -1,6 +1,7 @@
 package views;
 
 import code.ButtonClickListener;
+import code.KeyboardType;
 import code.interfaces.IController;
 import code.interfaces.IModel;
 import code.interfaces.IView;
@@ -62,7 +63,13 @@ public class OldSchoolUi implements IView {
 
 
     @Override
-    public void Update(String newText) {
+    public void UpdateText(String newText) {
         text_screen.setText(newText);
     }
+
+    @Override
+    public void SwitchKeyboard(KeyboardType type) {
+        // does not do anything for this phone type
+    }
+
 }

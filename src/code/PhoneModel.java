@@ -4,8 +4,6 @@ import code.interfaces.IModel;
 import code.interfaces.IView;
 
 import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PhoneModel implements IModel {
 
@@ -49,10 +47,13 @@ public class PhoneModel implements IModel {
 
     @Override
     public void setTextMessage(String msg) {
-        if(!msg.isEmpty() && msg.length() > MAX_TEXT_LENGTH)
-            msg = msg.substring(0, MAX_TEXT_LENGTH);
-        currentTextMessage = msg;
-        NotifyViews(currentTextMessage);
+        if(msg != null){
+            if(!msg.isEmpty() && msg.length() > MAX_TEXT_LENGTH)
+                msg = msg.substring(0, MAX_TEXT_LENGTH);
+            currentTextMessage = msg;
+            NotifyViews(currentTextMessage);
+
+        }
     }
 
     @Override
@@ -67,6 +68,12 @@ public class PhoneModel implements IModel {
     public void setPhoneNumber(String nmbr) {
         currentPhoneNumber = nmbr;
         NotifyViews(currentPhoneNumber);
+    }
+
+    @Override
+    public void SwitchKeyboardType(KeyboardType type) {
+        eKeyboardType = type;
+        NotifyKeyboard();
     }
 
     @Override
@@ -86,8 +93,10 @@ public class PhoneModel implements IModel {
 
     private static final int MAX_TEXT_LENGTH = 160;
 
-    private String currentPhoneNumber;
-    private String currentTextMessage;
+    private String currentPhoneNumber = "";
+    private String currentTextMessage = "";
+
+    private KeyboardType eKeyboardType = KeyboardType.HIDDEN;
 
     private LinkedList<IView> Views = new LinkedList<IView>();
 
@@ -102,9 +111,14 @@ public class PhoneModel implements IModel {
 
     private void NotifyViews(String text){
         for(IView Current : Views)
-            Current.Update(text);
-
+            Current.UpdateText(text);
     }
+
+    private void NotifyKeyboard(){
+        for(IView Current : Views)
+            Current.SwitchKeyboard(eKeyboardType);
+    }
+
 
     //TODO
     public void UpdateState()

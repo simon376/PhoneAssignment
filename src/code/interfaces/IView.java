@@ -1,5 +1,8 @@
 package code.interfaces;
 
+import code.KeyboardType;
+
 public interface IView {
-    void Update(String newText);
+    void UpdateText(String newText);
+    void SwitchKeyboard(KeyboardType type);
 }

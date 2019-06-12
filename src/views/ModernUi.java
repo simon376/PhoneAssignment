@@ -1,6 +1,7 @@
 package views;
 
 import code.ButtonClickListener;
+import code.KeyboardType;
 import code.interfaces.IController;
 import code.interfaces.IModel;
 import code.interfaces.IView;
@@ -53,12 +54,14 @@ public class ModernUi implements IView {
     private JButton bButton;
     private JButton SHIFTButton;
     private JButton mButton;
-    private JButton zButton1;
+    private JButton zButton;
     private JButton xButton;
     private JButton nButton;
     private JButton SPACEButton;
     private JButton DRAFTButton;
     private JButton SENDButton;
+    private JPanel panelAction;
+    private JPanel panelKeyboardHidden;
 
     public JPanel getPanelPhone() {
         return panelPhone;
@@ -68,6 +71,7 @@ public class ModernUi implements IView {
     private IModel theModel;
     final static String NUMPANEL = "Card with Numbers";
     final static String QWERTYPANEL = "Card with Qwerty";
+    final static String HIDDENPANEL = "Card with nothing";
     boolean isNumPad = true;
 
     public ModernUi(IModel theModel, IController theController)
@@ -76,11 +80,45 @@ public class ModernUi implements IView {
         this.theModel.RegisterView(this);
         this.theController = theController;
         initializeNumericalKeyboard();
-
+        initializeQwertyKeyboard();
+        panelKeyboard.add(panelKeyboardHidden,HIDDENPANEL);
         panelKeyboard.add(panelKeyboardNumerical,NUMPANEL);
         panelKeyboard.add(panelKeyBoardQwerty,QWERTYPANEL);
     }
 
+    private void initializeQwertyKeyboard() {
+        qButton.addActionListener(new ButtonClickListener(theController, "q"));
+        wButton.addActionListener(new ButtonClickListener(theController, "w"));
+        eButton.addActionListener(new ButtonClickListener(theController, "e"));
+        rButton.addActionListener(new ButtonClickListener(theController, "r"));
+        tButton.addActionListener(new ButtonClickListener(theController, "t"));
+        yButton.addActionListener(new ButtonClickListener(theController, "y"));
+        uButton.addActionListener(new ButtonClickListener(theController, "u"));
+        iButton.addActionListener(new ButtonClickListener(theController, "i"));
+        oButton.addActionListener(new ButtonClickListener(theController, "o"));
+        pButton.addActionListener(new ButtonClickListener(theController, "p"));
+        aButton.addActionListener(new ButtonClickListener(theController, "a"));
+        dButton.addActionListener(new ButtonClickListener(theController, "d"));
+        fButton.addActionListener(new ButtonClickListener(theController, "f"));
+        lButton.addActionListener(new ButtonClickListener(theController, "l"));
+        kButton.addActionListener(new ButtonClickListener(theController, "k"));
+        sButton.addActionListener(new ButtonClickListener(theController, "s"));
+        gButton.addActionListener(new ButtonClickListener(theController, "g"));
+        hButton.addActionListener(new ButtonClickListener(theController, "h"));
+        jButton.addActionListener(new ButtonClickListener(theController, "j"));
+        vButton.addActionListener(new ButtonClickListener(theController, "v"));
+        cButton.addActionListener(new ButtonClickListener(theController, "c"));
+        bButton.addActionListener(new ButtonClickListener(theController, "b"));
+        SHIFTButton.addActionListener(new ButtonClickListener(theController, "shift"));
+        mButton.addActionListener(new ButtonClickListener(theController, "m"));
+        zButton.addActionListener(new ButtonClickListener(theController, "z"));;
+        xButton.addActionListener(new ButtonClickListener(theController, "x"));
+        nButton.addActionListener(new ButtonClickListener(theController, "n"));
+        SPACEButton.addActionListener(new ButtonClickListener(theController, " "));
+        DRAFTButton.addActionListener(new ButtonClickListener(theController, "draft"));
+        SENDButton.addActionListener(new ButtonClickListener(theController, "send"));
+
+    }
 
     private void initializeNumericalKeyboard() {
         Button0.addActionListener(new ButtonClickListener(theController, "0"));
@@ -99,17 +137,25 @@ public class ModernUi implements IView {
         ButtonAction.addActionListener(new ButtonClickListener(theController, "action"));
     }
 
-    public void switchKeyboard()
-    {
-        CardLayout layout = (CardLayout) panelKeyboard.getLayout();
-        if(isNumPad)
-            layout.show(panelKeyboard,QWERTYPANEL);
-        else
-            layout.show(panelKeyboard,NUMPANEL);
+
+    @Override
+    public void UpdateText(String newText) {
+        text_screen.setText(newText);
     }
 
     @Override
-    public void Update(String newText) {
-        text_screen.setText(newText);
+    public void SwitchKeyboard(KeyboardType type) {
+        CardLayout layout = (CardLayout) panelKeyboard.getLayout();
+        switch(type){
+            case HIDDEN:
+                layout.show(panelKeyboard, HIDDENPANEL);
+                break;
+            case NUM:
+                layout.show(panelKeyboard, NUMPANEL);
+                break;
+            case QWERTY:
+                layout.show(panelKeyboard, QWERTYPANEL);
+                break;
+        }
     }
 }

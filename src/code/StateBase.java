@@ -17,6 +17,9 @@ public abstract class StateBase {
             case "#": handlePoundButton(context); break;
             case "phone": handlePhoneButton(context);break;
             case "hangup": handleHangupButton(context); break;
+            case "send": handleSendButton(context); break;
+            case "shift": handleShiftButton(context); break;
+            case "draft": handleDraftButton(context); break;
             case "action": handleActionButton(context, timesPressed); break;
             default:
                 handleOtherButton(context, button, timesPressed);

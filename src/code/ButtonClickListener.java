@@ -28,22 +28,7 @@ public class ButtonClickListener implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e) {
         JButton buttonPressed = (JButton) e.getSource();
-//
-//        //TODO: time presses
-//        if (lastButtonPressed == buttonPressed)
-//        {
-//            //The same button was clicked two times in a row
-//            long difference = (System.currentTimeMillis() - timerStart);
-//            if(difference < MAX_TIME_DIFF)
-//                buttonCounter++;
-//        }
-//        else
-//        {
-//            buttonCounter = 0;
-//        }
-//        timerStart = System.currentTimeMillis();
-//        lastButtonPressed = buttonPressed;
-
+        //TODO groß-klein-schreibung funktioniert erst ab zweitem klick
         theController.HandleButtonClick(buttonPressed, value);
     }
 

@@ -56,9 +56,12 @@ public class ModernPhoneController extends Context implements IController {
 
 class StateStartModern extends StateBase
 {
+
     @Override
     void handleActionButton(Context context, int timesPressed) {
         //TODO: show numkeyboard
+        context.Model.SwitchKeyboardType(KeyboardType.NUM);
+        context.State = new StateDialingModern();
     }
 }
 
@@ -83,17 +86,18 @@ class StateDialingModern extends StateBase
         //somehow detect double-click
         // show qwerty keyboard,
 
-        if(timesPressed == 2){
+        if(timesPressed == 1){
             // start messaging
             //try to fetch draft if one exists
             context.Model.setTextMessage( context.Model.getDraft());
 
-
+            context.Model.SwitchKeyboardType(KeyboardType.QWERTY);
             context.State = new StateMessagingModern();
         }
-        else if(timesPressed == 3){
+        else if(timesPressed == 2){
             context.Model.deleteDraft(); // try to delete draft if existing
             context.Model.setTextMessage("");
+            context.Model.SwitchKeyboardType(KeyboardType.QWERTY);
             context.State = new StateMessagingModern();
         }
 
@@ -107,6 +111,7 @@ class StateCallingModern extends StateBase
     void handlePhoneButton(Context context) {
         context.Model.endCall();
         //TODO: change interface (red button?)
+        context.Model.SwitchKeyboardType(KeyboardType.HIDDEN);
         context.State = new StateStartModern();
     }
 
@@ -122,12 +127,14 @@ class StateMessagingModern extends StateBase
     @Override
     public void handleSendButton(Context context) {
         context.Model.sendTextMessage();
+        context.Model.SwitchKeyboardType(KeyboardType.HIDDEN);
         context.State = new StateStartModern();
     }
 
     @Override
     public void handleDraftButton(Context context) {
         context.Model.saveDraft();
+        context.Model.SwitchKeyboardType(KeyboardType.HIDDEN);
         context.State = new StateStartModern();
     }
 
@@ -142,29 +149,12 @@ class StateMessagingModern extends StateBase
 
     @Override
     void handleOtherButton(Context context, String button, int timesPressed) {
-
-        //TODO: replace last letter with correct one
-        if(timesPressed > 0){
-            String parsedKey = KeyMap.getString(button, timesPressed);
-            if(parsedKey.isEmpty())
-                parsedKey = button;
-
-            //remove last character and replace with correct one
-            String msg = context.Model.getTextMessage();
-            if(msg.length() > 1){
-                msg = msg.substring(0, msg.length()-1);
-            }
-
-            if(messageCase == eMessageCase.UPPERCASE)
-                msg = msg.concat(parsedKey.toUpperCase());
-            else
-                msg = msg.concat(parsedKey.toLowerCase());
-            context.Model.setTextMessage(msg);
-
-        }
-        else{
-            context.Model.setTextMessage(context.Model.getTextMessage().concat(button));
-        }
+        String msg = context.Model.getTextMessage();
+        if(messageCase == eMessageCase.UPPERCASE)
+            msg = msg.concat(button.toUpperCase());
+        else
+            msg = msg.concat(button.toLowerCase());
+        context.Model.setTextMessage(msg);
 
     }
 }

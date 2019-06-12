@@ -7,6 +7,7 @@ import views.OldSchoolUi;
 import views.QwertyKeyboard;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Main {
 
@@ -17,29 +18,26 @@ public class Main {
         IController oldschoolPhoneController = new OldschoolPhoneController(new StateDialingOld(), theModel);
         OldSchoolUi oldSchoolUi = new OldSchoolUi(theModel,oldschoolPhoneController);
 
-        IController modernPhoneController = new ModernPhoneController(new StateDialingModern(), theModel);
+        IController modernPhoneController = new ModernPhoneController(new StateStartModern(), theModel);
         ModernUi modernUi = new ModernUi(theModel,modernPhoneController);
 
-        new QwertyKeyboard(oldschoolPhoneController).setVisible(true);
+        //new QwertyKeyboard(oldschoolPhoneController).setVisible(true);
 
         JFrame frame = new JFrame("Phone");
         frame.setContentPane(oldSchoolUi.getPanelPhone());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
-        frame.setVisible(true);
+       // frame.setVisible(true);
 
 
         JFrame frame2 = new JFrame("Phone");
+        frame2.setLayout(new BorderLayout());
         frame2.setContentPane(modernUi.getPanelPhone());
+        frame2.setPreferredSize(new Dimension(300, 500));
         frame2.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame2.pack();
         frame2.setVisible(true);
 
-        ModernUi m = modernUi;
-        m.switchKeyboard();
-        frame2.setContentPane(modernUi.getPanelPhone());
-        frame2.pack();
-        frame2.setVisible(true);
 
     }
 }

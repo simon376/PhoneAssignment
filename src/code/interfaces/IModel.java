@@ -1,5 +1,7 @@
 package code.interfaces;
 
+import code.KeyboardType;
+
 public interface IModel {
 
     void RegisterView(IView Target);
@@ -17,6 +19,7 @@ public interface IModel {
     String getPhoneNumber();
     void setPhoneNumber(String nmbr);
 
+    void SwitchKeyboardType(KeyboardType type);
 
     void clearData();
 
