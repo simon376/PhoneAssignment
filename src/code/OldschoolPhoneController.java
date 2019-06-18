@@ -6,8 +6,6 @@ import code.interfaces.IModel;
 import javax.swing.*;
 
 public class OldschoolPhoneController extends Context implements IController {
-    private IModel theModel;
-    private KeyMap theKeyMap;
 
     private JButton lastButtonPressed;
     private int buttonCounter;
@@ -16,20 +14,13 @@ public class OldschoolPhoneController extends Context implements IController {
     private static final long MAX_TIME_DIFF = 500;
 
 
-    public OldschoolPhoneController(StateBase stateBase, IModel theModel)
+    OldschoolPhoneController(StateBase stateBase, IModel theModel)
     {
         super(stateBase, theModel);
-        this.theModel = theModel;
-        this.theKeyMap = new KeyMap();
         this.timerStart = 0;
         this.buttonCounter = 0;
     }
-
-    public void Update()
-    {
-        theModel.UpdateState();
-    }
-
+    
     @Override
     public void HandleButtonClick(JButton button, String value) {
 
@@ -58,22 +49,22 @@ class StateDialingOld extends StateBase
 {
 
     @Override
-    public void handlePhoneButton(Context context) {
+    protected void handlePhoneButton(Context context) {
         // make phone call, switch State
         context.Model.makePhoneCall();
-        context.State = new StateCallingModern();
+        context.State = new StateCallingOld();
     }
 
     @Override
-    public void handleStarButton(Context context) {
-        // start messaging
+    protected void handleStarButton(Context context) {
         //try to fetch draft if one exists
+        // start messaging
         context.Model.setTextMessage( context.Model.getDraft());
-        context.State = new StateMessagingModern();
+        context.State = new StateMessagingOld();
     }
 
     @Override
-    void handleOtherButton(Context context, String button, int timesPressed) {
+    protected void handleOtherButton(Context context, String button, int timesPressed) {
         //just directly use the numbers, timesPressed is ignored
         context.Model.setPhoneNumber( context.Model.getPhoneNumber().concat(button));
     }
@@ -83,35 +74,39 @@ class StateCallingOld extends StateBase
 {
 
     @Override
-    public void handleHangupButton(Context context) {
+    protected void handleHangupButton(Context context) {
         context.Model.endCall();
-        //TODO: change interface (red button?)
-        context.State = new StateDialingModern();
+        context.State = new StateDialingOld();
     }
 
     // all other buttons are disabled
 }
 class StateMessagingOld extends StateBase
 {
-    enum eMessageCase { LOWERCASE, UPPERCASE};
-    eMessageCase messageCase;
+    enum eMessageCase { LOWERCASE, UPPERCASE}
+    private eMessageCase messageCase;
+    private KeyMap theKeyMap;
 
-    StateMessagingOld() { messageCase = eMessageCase.LOWERCASE;};
+
+    StateMessagingOld() { 
+        messageCase = eMessageCase.LOWERCASE;
+        theKeyMap = KeyMap.getInstance();
+    }
 
     @Override
-    public void handlePhoneButton(Context context) {
+    protected void handlePhoneButton(Context context) {
         context.Model.sendTextMessage();
-        context.State = new StateDialingModern();
+        context.State = new StateDialingOld();
     }
 
     @Override
-    public void handleHangupButton(Context context) {
+    protected void handleHangupButton(Context context) {
         context.Model.saveDraft();
-        context.State = new StateDialingModern();
+        context.State = new StateDialingOld();
     }
 
     @Override
-    public void handlePoundButton(Context context) {
+    protected void handlePoundButton(Context context) {
         if(messageCase == eMessageCase.LOWERCASE)
             messageCase = eMessageCase.UPPERCASE;
         else
@@ -120,11 +115,10 @@ class StateMessagingOld extends StateBase
 
 
     @Override
-    void handleOtherButton(Context context, String button, int timesPressed) {
+    protected void handleOtherButton(Context context, String button, int timesPressed) {
 
-        //TODO: replace last letter with correct one
         if(timesPressed > 0){
-            String parsedKey = KeyMap.getString(button, timesPressed);
+            String parsedKey = theKeyMap.getString(button, timesPressed);
             if(parsedKey.isEmpty())
                 parsedKey = button;
 

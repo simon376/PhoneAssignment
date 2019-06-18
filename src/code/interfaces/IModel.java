@@ -4,9 +4,6 @@ import code.KeyboardType;
 
 public interface IModel {
 
-    void RegisterView(IView Target);
-    void UpdateState();
-
     void makePhoneCall();
     void endCall();
     void sendTextMessage();
@@ -19,9 +16,14 @@ public interface IModel {
     String getPhoneNumber();
     void setPhoneNumber(String nmbr);
 
-    void SwitchKeyboardType(KeyboardType type);
-
     void clearData();
-
     void deleteDraft();
+
+    void setKeyboardType(KeyboardType type);
+
+    void RegisterView(IView Target);
+    void NotifyViews(String text);
+    void NotifyKeyboard();
+
+
 }

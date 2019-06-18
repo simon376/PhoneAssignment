@@ -2,13 +2,22 @@ package code;
 
 import java.util.*;
 
-//TODO: Singleton / static / whatever
-public class KeyMap {
+// KeyMap ist a Singleton Class used to map multiple button presses on the number keyboard
+// to the correct numbers or letters.
+final class KeyMap {
+
+    private static KeyMap INSTANCE;
 
     private static final Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
 
-    KeyMap(){
+    private KeyMap(){
         initializeMap();
+    }
+
+    public static KeyMap getInstance(){
+        if(INSTANCE == null)
+            INSTANCE = new KeyMap();
+        return INSTANCE;
     }
 
     private void initializeMap() {
@@ -24,7 +33,7 @@ public class KeyMap {
         map.put("9", new ArrayList<>(Arrays.asList("9", "w", "x", "y", "z")));
     }
 
-    public static String getString(String key, int timesPressed){
+    String getString(String key, int timesPressed){
         ArrayList<String> list = map.get(key);
         if(list != null){
             return list.get(timesPressed % list.size());

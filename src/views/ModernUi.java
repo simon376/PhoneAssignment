@@ -27,7 +27,7 @@ public class ModernUi implements IView {
     private JButton ButtonStar;
     private JButton Button0;
     private JButton ButtonPound;
-    private JTextArea text_screen;
+    private JTextArea textScreen;
     private JButton ButtonPhone;
     private JButton ButtonAction;
     private JButton qButton;
@@ -63,16 +63,15 @@ public class ModernUi implements IView {
     private JPanel panelAction;
     private JPanel panelKeyboardHidden;
 
-    public JPanel getPanelPhone() {
+    public JPanel getPhonePanel() {
         return panelPhone;
     }
 
     private IController theController;
     private IModel theModel;
-    final static String NUMPANEL = "Card with Numbers";
-    final static String QWERTYPANEL = "Card with Qwerty";
-    final static String HIDDENPANEL = "Card with nothing";
-    boolean isNumPad = true;
+    private final static String NUM_PANEL = "Card with Numbers";
+    private final static String QWERTY_PANEL = "Card with Qwerty";
+    private final static String HIDDEN_PANEL = "Card with nothing";
 
     public ModernUi(IModel theModel, IController theController)
     {
@@ -81,9 +80,9 @@ public class ModernUi implements IView {
         this.theController = theController;
         initializeNumericalKeyboard();
         initializeQwertyKeyboard();
-        panelKeyboard.add(panelKeyboardHidden,HIDDENPANEL);
-        panelKeyboard.add(panelKeyboardNumerical,NUMPANEL);
-        panelKeyboard.add(panelKeyBoardQwerty,QWERTYPANEL);
+        panelKeyboard.add(panelKeyboardHidden, HIDDEN_PANEL);
+        panelKeyboard.add(panelKeyboardNumerical, NUM_PANEL);
+        panelKeyboard.add(panelKeyBoardQwerty, QWERTY_PANEL);
     }
 
     private void initializeQwertyKeyboard() {
@@ -140,21 +139,21 @@ public class ModernUi implements IView {
 
     @Override
     public void UpdateText(String newText) {
-        text_screen.setText(newText);
+        textScreen.setText(newText);
     }
 
     @Override
-    public void SwitchKeyboard(KeyboardType type) {
+    public void UpdateKeyboard(KeyboardType type) {
         CardLayout layout = (CardLayout) panelKeyboard.getLayout();
         switch(type){
             case HIDDEN:
-                layout.show(panelKeyboard, HIDDENPANEL);
+                layout.show(panelKeyboard, HIDDEN_PANEL);
                 break;
             case NUM:
-                layout.show(panelKeyboard, NUMPANEL);
+                layout.show(panelKeyboard, NUM_PANEL);
                 break;
             case QWERTY:
-                layout.show(panelKeyboard, QWERTYPANEL);
+                layout.show(panelKeyboard, QWERTY_PANEL);
                 break;
         }
     }

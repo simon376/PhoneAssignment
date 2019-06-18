@@ -19,7 +19,7 @@
         </properties>
         <border type="none"/>
         <children>
-          <component id="78596" class="javax.swing.JTextArea" binding="text_screen">
+          <component id="78596" class="javax.swing.JTextArea" binding="textScreen">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
                 <preferred-size width="508" height="50"/>
@@ -50,7 +50,7 @@
             <properties>
               <background color="-11316397"/>
               <opaque value="false"/>
-              <visible value="false"/>
+              <visible value="true"/>
             </properties>
             <border type="none"/>
             <children>

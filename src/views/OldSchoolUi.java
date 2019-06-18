@@ -23,7 +23,7 @@ public class OldSchoolUi implements IView {
     private JButton ButtonStar;
     private JButton Button0;
     private JButton ButtonPound;
-    private JTextArea text_screen;
+    private JTextArea textScreen;
     private JPanel panelCallButtons;
     private JButton ButtonPhone;
     private JButton ButtonHangup;
@@ -64,11 +64,11 @@ public class OldSchoolUi implements IView {
 
     @Override
     public void UpdateText(String newText) {
-        text_screen.setText(newText);
+        textScreen.setText(newText);
     }
 
     @Override
-    public void SwitchKeyboard(KeyboardType type) {
+    public void UpdateKeyboard(KeyboardType type) {
         // does not do anything for this phone type
     }
 
