@@ -48,7 +48,7 @@ class StateStartModern extends StateBase
 
     @Override
     protected void handleActionButton(Context context, int timesPressed) {
-        context.Model.setKeyboardType(KeyboardType.NUM);
+        context.Model.setKeyboardType(KeyboardType.DIALING);
         context.State = new StateDialingModern();
     }
 }

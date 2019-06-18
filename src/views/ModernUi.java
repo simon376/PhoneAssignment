@@ -149,7 +149,7 @@ public class ModernUi implements IView {
             case HIDDEN:
                 layout.show(panelKeyboard, HIDDEN_PANEL);
                 break;
-            case NUM:
+            case DIALING:
                 layout.show(panelKeyboard, NUM_PANEL);
                 break;
             case QWERTY:
