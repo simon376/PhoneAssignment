@@ -6,7 +6,7 @@ import code.interfaces.IModel;
 abstract class Context {
 
     StateBase State;
-    IModel Model;
+    final IModel Model;
 
     Context(StateBase state, IModel model)
     {

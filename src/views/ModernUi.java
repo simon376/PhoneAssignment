@@ -63,20 +63,22 @@ public class ModernUi implements IView {
     private JPanel panelAction;
     private JPanel panelKeyboardHidden;
 
+
     public JPanel getPhonePanel() {
         return panelPhone;
     }
 
-    private IController theController;
-    private IModel theModel;
+    private final IController theController;
     private final static String NUM_PANEL = "Card with Numbers";
     private final static String QWERTY_PANEL = "Card with Qwerty";
     private final static String HIDDEN_PANEL = "Card with nothing";
 
+    private Color phoneButtonGreen = new Color(0x15B405);
+    private Color phoneButtonRed = new Color(0xB40504);
+
     public ModernUi(IModel theModel, IController theController)
     {
-        this.theModel = theModel;
-        this.theModel.RegisterView(this);
+        theModel.RegisterView(this);
         this.theController = theController;
         initializeNumericalKeyboard();
         initializeQwertyKeyboard();
@@ -110,7 +112,7 @@ public class ModernUi implements IView {
         bButton.addActionListener(new ButtonClickListener(theController, "b"));
         SHIFTButton.addActionListener(new ButtonClickListener(theController, "shift"));
         mButton.addActionListener(new ButtonClickListener(theController, "m"));
-        zButton.addActionListener(new ButtonClickListener(theController, "z"));;
+        zButton.addActionListener(new ButtonClickListener(theController, "z"));
         xButton.addActionListener(new ButtonClickListener(theController, "x"));
         nButton.addActionListener(new ButtonClickListener(theController, "n"));
         SPACEButton.addActionListener(new ButtonClickListener(theController, " "));
@@ -150,6 +152,11 @@ public class ModernUi implements IView {
                 layout.show(panelKeyboard, HIDDEN_PANEL);
                 break;
             case DIALING:
+                ButtonPhone.setBackground(phoneButtonGreen);
+                layout.show(panelKeyboard, NUM_PANEL);
+                break;
+            case CALLING:
+                ButtonPhone.setBackground(phoneButtonRed);
                 layout.show(panelKeyboard, NUM_PANEL);
                 break;
             case QWERTY:

@@ -60,6 +60,7 @@ class StateDialingModern extends StateBase
     protected void handlePhoneButton(Context context) {
         // make phone call, switch State
         context.Model.makePhoneCall();
+        context.Model.setKeyboardType(KeyboardType.CALLING);
         context.State = new StateCallingModern();
     }
 
@@ -95,7 +96,6 @@ class StateCallingModern extends StateBase
     @Override
     protected void handlePhoneButton(Context context) {
         context.Model.endCall();
-        //TODO: change interface (red button?)
         context.Model.setKeyboardType(KeyboardType.HIDDEN);
         context.State = new StateStartModern();
     }

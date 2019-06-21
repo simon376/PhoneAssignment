@@ -30,7 +30,7 @@
               <font name="Fira Code" size="18"/>
               <foreground color="-16777216"/>
               <opaque value="false"/>
-              <text value="das ist ein Beispieltext"/>
+              <text value="Welcome"/>
             </properties>
           </component>
         </children>
@@ -50,7 +50,7 @@
             <properties>
               <background color="-11316397"/>
               <opaque value="false"/>
-              <visible value="false"/>
+              <visible value="true"/>
             </properties>
             <border type="none"/>
             <children>

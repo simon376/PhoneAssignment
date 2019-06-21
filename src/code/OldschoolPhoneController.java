@@ -85,7 +85,7 @@ class StateMessagingOld extends StateBase
 {
     enum eMessageCase { LOWERCASE, UPPERCASE}
     private eMessageCase messageCase;
-    private KeyMap theKeyMap;
+    private final KeyMap theKeyMap;
 
 
     StateMessagingOld() { 

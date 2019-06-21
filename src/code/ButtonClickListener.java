@@ -8,8 +8,8 @@ import java.awt.event.ActionListener;
 
 public class ButtonClickListener implements ActionListener
 {
-    private String value;
-    private IController theController;
+    private final String value;
+    private final IController theController;
 
     public ButtonClickListener(IController theController, String value)
     {

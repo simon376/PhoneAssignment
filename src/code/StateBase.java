@@ -4,23 +4,23 @@ package code;
 // the result of the method calls depends on the current state of the application.
 // context is passed to all the methods so the State can be changed.
 abstract class StateBase {
-    protected void handlePhoneButton(Context context) {}
+    void handlePhoneButton(Context context) {}
 
-    protected void handleHangupButton(Context context) {}
+    void handleHangupButton(Context context) {}
 
-    protected void handleStarButton(Context context) {}
+    void handleStarButton(Context context) {}
 
-    protected void handlePoundButton(Context context) {}
+    void handlePoundButton(Context context) {}
 
-    protected void handleActionButton(Context context, int timesPressed) {}
+    void handleActionButton(Context context, int timesPressed) {}
 
-    protected void handleSendButton(Context context) {}
+    void handleSendButton(Context context) {}
 
-    protected void handleShiftButton(Context context) {}
+    void handleShiftButton(Context context) {}
 
-    protected void handleDraftButton(Context context) {}
+    void handleDraftButton(Context context) {}
 
-    protected void handleOtherButton(Context context, String button, int timesPressed){}
+    void handleOtherButton(Context context, String button, int timesPressed){}
 
     void handleButton(Context context, String button, int timesPressed){
         switch (button){

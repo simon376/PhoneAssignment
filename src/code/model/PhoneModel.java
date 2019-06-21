@@ -14,10 +14,10 @@ public class PhoneModel implements IModel {
 
     private KeyboardType eKeyboardType = KeyboardType.HIDDEN;
 
-    private LinkedList<IView> Views = new LinkedList<IView>();
+    private final LinkedList<IView> Views = new LinkedList<>();
 
     // drafts will be saved as a phone number - text message pair
-    private HashMap<String,String> Drafts = new HashMap<>();
+    private final HashMap<String,String> Drafts = new HashMap<>();
 
 
     // makes phone call to current number

@@ -8,7 +8,7 @@ final class KeyMap {
 
     private static KeyMap INSTANCE;
 
-    private static final Map<String, ArrayList<String>> map = new HashMap<String, ArrayList<String>>();
+    private static final Map<String, ArrayList<String>> map = new HashMap<>();
 
     private KeyMap(){
         initializeMap();

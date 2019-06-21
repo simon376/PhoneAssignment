@@ -33,13 +33,11 @@ public class OldSchoolUi implements IView {
         return panelPhone;
     }
 
-    private IController theController;
-    private IModel theModel;
+    private final IController theController;
 
     public OldSchoolUi(IModel theModel, IController theController)
     {
-        this.theModel = theModel;
-        this.theModel.RegisterView(this);
+        theModel.RegisterView(this);
         this.theController = theController;
         initialize();
     }
